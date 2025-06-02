@@ -1,4 +1,104 @@
-h1 {
-    color: aqua;
+/* General Styles */
+body {
+  font-family: 'Manishal', sans-serif;
+  background-color: #fafafa;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+h1, h2, h3 {
+  color: #D32F2F; /* Deep red for food-related headings */
+}
+
+/* Navigation Bar */
+.navbar {
+  background-color: #FF7043; /* Food orange */
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .nav-left a, .navbar  {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 0 10px;
+}
+
+.navbar .nav-left a:hover, .navbar .nav-right button:hover {
+  text-decoration: underline;
+}
+
+.nav-right .profile-btn {
+  background-color: #FFF;
+  color: #FF7043;
+  padding: 10px 15px;
+  font-size: 16px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.nav-right .profile-btn:hover {
+  background-color: #FF5722;
+  color: white;
+}
+/* Main Content */
+main {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+main h1 {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+main p {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+
+/* Footer */
+footer {
+  background-color: #FF7043;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: 30px;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
     text-align: center;
+  }
+
+  .recipe-grid, .category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form {
+    margin: 20px;
+  }
 }
