@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Recipe | Tastes of India</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- DaisyUI (Tailwind Plugin) -->
+  <script src="https://cdn.jsdelivr.net/npm/daisyui@1.10.0/dist/full.js"></script>
+   <!-- Link to Custom Styles -->
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body class="bg-base-100 text-base-content">
+
+  <!-- Navigation Bar -->
+  <header class="bg-blue-600 text-white p-4">
+    <nav class="navbar">
+      <div class="flex justify-between items-center">
+        <div class="flex space-x-4">
+          <a href="/" class="text-white hover:underline">Home</a>
+          <a href="/about" class="text-white hover:underline">About</a>
+          <a href="/recipes" class="text-white hover:underline">Recipes</a>
+          <a href="/contact" class="text-white hover:underline">Contact</a>
+        </div>
+        <div>
+          <a href="/Profile" class="text-white">
+            <button class="btn btn-outline text-white">Profile</button>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container mx-auto p-8">
+    <h1 class="text-3xl font-bold mb-4">Upload Your Recipe</h1>
+    <p class="mb-6">Share your favorite Indian recipe with the world. Fill in the details below and upload your recipe.</p>
+
+    <!-- Success/Error Message (Hidden initially) -->
+    <div id="message" class="hidden p-4 mb-4 rounded-lg"></div>
+
+    <!-- Recipe Upload Form -->
+    <form id="uploadForm" action="/submit-recipe" method="POST" enctype="multipart/form-data" class="space-y-6">
+
+      <!-- Recipe Name -->
+      <div class="form-control">
+        <label for="recipe-name" class="label">
+          <span class="label-text font-medium">Recipe Name:</span>
+        </label>
+        <input type="text" id="recipe-name" name="recipe-name" placeholder="Enter recipe name"
+          class="input input-bordered w-full" required>
+      </div>
+
+      <!-- Recipe Description -->
+      <div class="form-control">
+        <label for="recipe-description" class="label">
+          <span class="label-text font-medium">Recipe Description:</span>
+        </label>
+        <textarea id="recipe-description" name="recipe-description"
+          placeholder="Enter a brief description of the recipe" class="textarea textarea-bordered w-full" required></textarea>
+      </div>
+
+      <!-- Ingredients -->
+      <div class="form-control">
+        <label for="recipe-ingredients" class="label">
+          <span class="label-text font-medium">Ingredients:</span>
+        </label>
+        <textarea id="recipe-ingredients" name="recipe-ingredients"
+          placeholder="List ingredients (separate by commas)" class="textarea textarea-bordered w-full" required></textarea>
+      </div>
+
+      <!-- Instructions -->
+      <div class="form-control">
+        <label for="recipe-instructions" class="label">
+          <span class="label-text font-medium">Instructions:</span>
+        </label>
+        <textarea id="recipe-instructions" name="recipe-instructions"
+          placeholder="Step-by-step cooking instructions" class="textarea textarea-bordered w-full" required></textarea>
+      </div>
+
+      <!-- Recipe Image -->
+      <div class="form-control">
+        <label for="recipe-image" class="label">
+          <span class="label-text font-medium">Upload Recipe Image:</span>
+        </label>
+        <input type="file" id="recipe-image" name="recipe-image" accept="image/*" class="file-input file-input-bordered w-full" required>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary w-full">Submit Recipe</button>
+    </form>
+
+  </main>
+
+  <script>
+    // Handle form submission using AJAX
+    document.getElementById('uploadForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the default form submission
+
+      let formData = new FormData(this);
+
+      fetch('/submit-recipe', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.text())
+      .then(data => {
+        // Show success message
+        document.getElementById('message').innerHTML = `<div class="alert alert-success"><strong>Success!</strong> Your recipe has been uploaded successfully.</div>`;
+        document.getElementById('message').classList.remove('hidden');
+        document.getElementById('uploadForm').reset(); // Clear the form fields
+      })
+      .catch(error => {
+        // Show error message
+        document.getElementById('message').innerHTML = `<div class="alert alert-error"><strong>Error!</strong> Something went wrong. Please try again.</div>`;
+        document.getElementById('message').classList.remove('hidden');
+      });
+    });
+  </script>
+
+</body>
+
+</html>
